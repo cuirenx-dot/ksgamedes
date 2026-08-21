@@ -326,3 +326,10 @@ function ending(sendOff) {
 
     addChoice("タイトルへ", showTitle);
 }
+function showMessage(name,text){
+
+    speaker.textContent = name;
+
+    document.getElementById("text")
+        .textContent = text;
+}
