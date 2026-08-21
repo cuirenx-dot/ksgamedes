@@ -1,13 +1,64 @@
 const flags = {
 
     ticket:false,
-
     bench:false,
-
     clock:false,
-
     talkedYui:false
+
 };
+
+function showDialogue(dialogues){
+
+    let index = 0;
+
+    function next(){
+
+        if(index >= dialogues.length){
+
+            const choices =
+                document.getElementById("choices");
+
+            if(choices){
+                choices.innerHTML = "";
+            }
+
+            return;
+        }
+
+        const d = dialogues[index];
+
+        showMessage(
+            d.speaker,
+            d.text
+        );
+
+        const choices =
+            document.getElementById("choices");
+
+        if(!choices){
+            return;
+        }
+
+        choices.innerHTML = "";
+
+        const btn =
+            document.createElement("button");
+
+        btn.textContent = "次へ";
+
+        btn.onclick = () => {
+
+            index++;
+
+            next();
+
+        };
+
+        choices.appendChild(btn);
+    }
+
+    next();
+}
 
 function interact(){
 
@@ -34,14 +85,83 @@ function runEvent(id){
 
     switch(id){
 
+        case "yui":
+
+            flags.talkedYui = true;
+
+            showDialogue([
+
+                {
+                    speaker:"ユイ",
+                    text:"あ、起きた。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"またベンチで寝てたでしょ。"
+                },
+
+                {
+                    speaker:"ハル",
+                    text:"寝てない。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"目閉じてたじゃん。"
+                },
+
+                {
+                    speaker:"ハル",
+                    text:"考え事してただけ。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"それを寝てたって言うんだよ。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"発車まで、あと三日だね。"
+                }
+
+            ]);
+
+            break;
+
         case "ticket":
 
             flags.ticket = true;
 
-            showMessage(
-                "切符",
-                "古い切符を拾った。"
-            );
+            showDialogue([
+
+                {
+                    speaker:"ハル",
+                    text:"古い切符だ。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"あ、それ。"
+                },
+
+                {
+                    speaker:"ハル",
+                    text:"知ってるのか？"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"なんとなく。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"大事なものな気がする。"
+                }
+
+            ]);
 
             break;
 
@@ -49,10 +169,39 @@ function runEvent(id){
 
             flags.bench = true;
 
-            showMessage(
-                "ベンチ",
-                "H+Yと刻まれている。"
-            );
+            showDialogue([
+
+                {
+                    speaker:"ハル",
+                    text:"H+Y……？"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"うわ。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"なんか恥ずかしい。"
+                },
+
+                {
+                    speaker:"ハル",
+                    text:"お前が書いたんじゃないの。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"違うし。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"……多分。"
+                }
+
+            ]);
 
             break;
 
@@ -60,21 +209,34 @@ function runEvent(id){
 
             flags.clock = true;
 
-            showMessage(
-                "時計",
-                "13:13で止まっている。"
-            );
+            showDialogue([
 
-            break;
+                {
+                    speaker:"ハル",
+                    text:"13:13で止まってる。"
+                },
 
-        case "yui":
+                {
+                    speaker:"ユイ",
+                    text:"中途半端な時間だね。"
+                },
 
-            flags.talkedYui = true;
+                {
+                    speaker:"ハル",
+                    text:"壊れてるだけだろ。"
+                },
 
-            showMessage(
-                "ユイ",
-                "発車まで、あと三日だね。"
-            );
+                {
+                    speaker:"ユイ",
+                    text:"そうかな。"
+                },
+
+                {
+                    speaker:"ユイ",
+                    text:"なんか待ってるみたい。"
+                }
+
+            ]);
 
             break;
     }
