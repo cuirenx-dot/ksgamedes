@@ -2,73 +2,93 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>発車まで、あと三日。</title>
+<title>発車まで、あと三日。</title>
 
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-    <div id="game">
+<div id="game">
 
-        <h1 id="title">発車まで、あと三日。</h1>
+    <h1 id="title">発車まで、あと三日。</h1>
 
-        <div id="subtitle"></div>
+    <div id="subtitle"></div>
 
-        <div id="text-box">
-            <div id="speaker"></div>
-            <div id="text"></div>
-        </div>
+    <div id="text-box">
 
-        <div id="choices"></div>
+        <div id="speaker">ユイ</div>
 
-        <div id="menu">
-            <button id="startBtn">はじめから</button>
-            <button id="continueBtn">つづきから</button>
-            <button id="endingBtn">エンド一覧</button>
+        <div id="text">
+            発車まで、あと三日だね。
         </div>
 
     </div>
 
-    <!-- マップ -->
+    <div id="choices"></div>
+
+    <div id="menu">
+
+        <button id="startBtn">
+            はじめから
+        </button>
+
+        <button id="continueBtn">
+            つづきから
+        </button>
+
+        <button id="endingBtn">
+            エンド一覧
+        </button>
+
+    </div>
 
     <div id="map">
-        <div id="player">🚶</div>
-    </div>
 
-    <!-- 操作ボタン -->
+        <div id="player">🚶</div>
+
+    </div>
 
     <div id="controls">
 
-        <button onclick="move(0,-1)">↑</button>
+        <button onclick="move(0,-1)">
+            ↑
+        </button>
 
         <div>
-            <button onclick="move(-1,0)">←</button>
+
+            <button onclick="move(-1,0)">
+                ←
+            </button>
 
             <button onclick="interact()">
                 調べる
             </button>
 
-            <button onclick="move(1,0)">→</button>
+            <button onclick="move(1,0)">
+                →
+            </button>
+
         </div>
 
-        <button onclick="move(0,1)">↓</button>
+        <button onclick="move(0,1)">
+            ↓
+        </button>
 
     </div>
 
-    <!-- JavaScript -->
+</div>
 
-    <script src="js/maps.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/events.js"></script>
-
-    <script src="js/data.js"></script>
-    <script src="js/save.js"></script>
-    <script src="js/game.js"></script>
+<script src="js/data.js"></script>
+<script src="js/maps.js"></script>
+<script src="js/player.js"></script>
+<script src="js/events.js"></script>
+<script src="js/save.js"></script>
+<script src="js/game.js"></script>
 
 </body>
-
 </html>
