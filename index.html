@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>発車まで、あと三日。</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>発車まで、あと三日。</title>
 
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
 
-<h1>発車まで、あと三日。</h1>
+<div id="game">
 
-<p>ゲームテスト成功！</p>
+    <h1 id="title">発車まで、あと三日。</h1>
 
-<script src="game.js"></script>
+    <div id="subtitle"></div>
+
+    <div id="text-box">
+        <div id="speaker"></div>
+        <div id="text"></div>
+    </div>
+
+    <div id="choices"></div>
+
+    <div id="menu">
+        <button id="startBtn">はじめから</button>
+        <button id="continueBtn">つづきから</button>
+        <button id="endingBtn">エンド一覧</button>
+    </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/save.js"></script>
+<script src="js/game.js"></script>
 
 </body>
 </html>
