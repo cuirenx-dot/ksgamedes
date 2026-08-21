@@ -333,3 +333,37 @@ function showMessage(name,text){
     document.getElementById("text")
         .textContent = text;
 }
+function renderMap(){
+
+    const map =
+        document.getElementById("map");
+
+    document
+        .querySelectorAll(".map-object")
+        .forEach(e=>e.remove());
+
+    MAPS.station_day1.objects.forEach(obj=>{
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "map-object";
+
+        el.textContent =
+            obj.icon;
+
+        el.style.left =
+            obj.x + "px";
+
+        el.style.top =
+            obj.y + "px";
+
+        map.appendChild(el);
+
+    });
+
+    renderPlayer();
+}
+
+renderMap();
