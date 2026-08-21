@@ -1,75 +1,19 @@
-const flags = {
-
-    ticket:false,
-    bench:false,
-    clock:false,
-    talkedYui:false
-
-};
-
-function showDialogue(dialogues){
-
-    let index = 0;
-
-    function next(){
-
-        if(index >= dialogues.length){
-
-            const choices =
-                document.getElementById("choices");
-
-            if(choices){
-                choices.innerHTML = "";
-            }
-
-            return;
-        }
-
-        const d = dialogues[index];
-
-        showMessage(
-            d.speaker,
-            d.text
-        );
-
-        const choices =
-            document.getElementById("choices");
-
-        if(!choices){
-            return;
-        }
-
-        choices.innerHTML = "";
-
-        const btn =
-            document.createElement("button");
-
-        btn.textContent = "次へ";
-
-        btn.onclick = () => {
-
-            index++;
-
-            next();
-
-        };
-
-        choices.appendChild(btn);
-    }
-
-    next();
-}
-
 function interact(){
 
-    const map =
-        MAPS.station_day1;
+    const objects =
+        MAPS.station_day1.objects;
 
-    for(const obj of map.objects){
+    for(const obj of objects){
 
-        if(near(obj.x,obj.y)){
+        const dx =
+            Math.abs(player.x - obj.x);
 
-            runEvent(obj.id);
+        const dy =
+            Math.abs(player.y - obj.y);
+
+        if(dx < 40 && dy < 40){
+
+            triggerEvent(obj);
 
             return;
         }
@@ -77,167 +21,131 @@ function interact(){
 
     showMessage(
         "",
-        "何もない。"
+        "特に何もない。"
     );
 }
 
-function runEvent(id){
+function triggerEvent(obj){
 
-    switch(id){
+    switch(obj.id){
 
         case "yui":
-
-            flags.talkedYui = true;
-
-            showDialogue([
-
-                {
-                    speaker:"ユイ",
-                    text:"あ、起きた。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"またベンチで寝てたでしょ。"
-                },
-
-                {
-                    speaker:"ハル",
-                    text:"寝てない。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"目閉じてたじゃん。"
-                },
-
-                {
-                    speaker:"ハル",
-                    text:"考え事してただけ。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"それを寝てたって言うんだよ。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"発車まで、あと三日だね。"
-                }
-
-            ]);
-
+            talkYui();
             break;
 
         case "ticket":
-
-            flags.ticket = true;
-
-            showDialogue([
-
-                {
-                    speaker:"ハル",
-                    text:"古い切符だ。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"あ、それ。"
-                },
-
-                {
-                    speaker:"ハル",
-                    text:"知ってるのか？"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"なんとなく。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"大事なものな気がする。"
-                }
-
-            ]);
-
+            findTicket();
             break;
 
         case "bench":
-
-            flags.bench = true;
-
-            showDialogue([
-
-                {
-                    speaker:"ハル",
-                    text:"H+Y……？"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"うわ。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"なんか恥ずかしい。"
-                },
-
-                {
-                    speaker:"ハル",
-                    text:"お前が書いたんじゃないの。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"違うし。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"……多分。"
-                }
-
-            ]);
-
+            checkBench();
             break;
 
         case "clock":
-
-            flags.clock = true;
-
-            showDialogue([
-
-                {
-                    speaker:"ハル",
-                    text:"13:13で止まってる。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"中途半端な時間だね。"
-                },
-
-                {
-                    speaker:"ハル",
-                    text:"壊れてるだけだろ。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"そうかな。"
-                },
-
-                {
-                    speaker:"ユイ",
-                    text:"なんか待ってるみたい。"
-                }
-
-            ]);
-
+            checkClock();
             break;
     }
+}
+
+function talkYui(){
+
+    if(!gameData.yuiTalk1){
+
+        gameData.yuiTalk1 = true;
+        saveGame(gameData);
+
+        showMessage(
+            "ユイ",
+`発車まで、
+あと三日だね。
+
+なんだか
+あっという間だった。`
+        );
+
+        return;
+    }
+
+    if(!gameData.yuiTalk2){
+
+        gameData.yuiTalk2 = true;
+        saveGame(gameData);
+
+        showMessage(
+            "ユイ",
+`卒業したらさ。
+
+私たち、
+どうなるんだろうね。`
+        );
+
+        return;
+    }
+
+    if(!gameData.yuiTalk3){
+
+        gameData.yuiTalk3 = true;
+        saveGame(gameData);
+
+        showMessage(
+            "ユイ",
+`もし、
+全部やり直せるなら。
+
+君は何を変える？`
+        );
+
+        return;
+    }
+
+    showMessage(
+        "ユイ",
+`また会いに来てくれたんだね。`
+    );
+}
+
+function findTicket(){
+
+    if(gameData.ticket){
+
+        showMessage(
+            "",
+            "もう切符は拾っている。"
+        );
+
+        return;
+    }
+
+    gameData.ticket = true;
+
+    saveGame(gameData);
+
+    showMessage(
+        "",
+`古びた切符を拾った。
+
+行き先は消えて読めない。`
+    );
+}
+
+function checkBench(){
+
+    showMessage(
+        "",
+`古いベンチ。
+
+ここでユイと
+何度も話した気がする。`
+    );
+}
+
+function checkClock(){
+
+    showMessage(
+        "",
+`駅の時計だ。
+
+発車まで、
+あと三日。`
+    );
 }
