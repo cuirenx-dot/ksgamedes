@@ -1,0 +1,180 @@
+let ticket = false;
+let promise = false;
+
+const text = document.getElementById("text");
+const choices = document.getElementById("choices");
+
+function clearChoices(){
+    choices.innerHTML = "";
+}
+
+function addChoice(label, callback){
+
+    const btn = document.createElement("button");
+
+    btn.textContent = label;
+    btn.onclick = callback;
+
+    choices.appendChild(btn);
+}
+
+function start(){
+
+    text.innerText =
+`【1日目】
+
+駅でユイと帰っている。
+
+ホームの隅に古い切符が落ちていた。`;
+
+    clearChoices();
+
+    addChoice("切符をもらう", () => {
+        ticket = true;
+        day2();
+    });
+
+    addChoice("いらない", () => {
+        ticket = false;
+        day2();
+    });
+}
+
+function day2(){
+
+    text.innerText =
+`【2日目】
+
+ユイ
+「卒業してもさ、
+私たちって会うのかな。」`;
+
+    clearChoices();
+
+    addChoice("会いに行く", () => {
+        promise = true;
+        day3();
+    });
+
+    addChoice("自然に会わなくなる", () => {
+        promise = false;
+        day3();
+    });
+}
+
+function day3(){
+
+    text.innerText =
+`【3日目】
+
+終電がホームへ入ってくる。
+
+ユイ
+「私が乗れば世界は残る。」
+
+「乗らなければ全部終わる。」`;
+
+    clearChoices();
+
+    addChoice("行かせる", () => ending(true));
+    addChoice("行かせない", () => ending(false));
+}
+
+function ending(goTrain){
+
+    clearChoices();
+
+    let title = "";
+    let story = "";
+
+    if(goTrain){
+
+        if(ticket && promise){
+
+            title = "見送り";
+
+            story =
+`二人は笑って別れた。
+
+しかし違和感だけが残る。`;
+
+        }
+
+        else if(ticket){
+
+            title = "忘却";
+
+            story =
+`切符も記憶も消えた。`;
+
+        }
+
+        else if(promise){
+
+            title = "約束";
+
+            story =
+`毎年駅へ通う。`;
+
+        }
+
+        else{
+
+            title = "さよなら";
+
+            story =
+`ユイは消えた。`;
+
+        }
+
+    }
+
+    else{
+
+        if(ticket && promise){
+
+            title = "繰り返し";
+
+            story =
+`時計は13:13。
+
+気付くと最初へ戻っていた。`;
+
+        }
+
+        else if(ticket){
+
+            title = "切符の行き先";
+
+            story =
+`切符だけが残った。`;
+
+        }
+
+        else if(promise){
+
+            title = "最後の放課後";
+
+            story =
+`世界の終わりまで一緒にいた。`;
+
+        }
+
+        else{
+
+            title = "白";
+
+            story =
+`世界は消えた。`;
+
+        }
+
+    }
+
+    text.innerText =
+`END：${title}
+
+${story}`;
+}
+
+start();
