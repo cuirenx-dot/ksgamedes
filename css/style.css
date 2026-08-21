@@ -24,75 +24,96 @@ body{
 }
 
 #text-box{
-    min-height:220px;
     border:1px solid #444;
-    padding:20px;
+    background:#181818;
+    min-height:180px;
+    padding:25px;
     margin-bottom:20px;
-    background:#1b1b1b;
 }
 
 #speaker{
+    font-size:28px;
     font-weight:bold;
-    margin-bottom:10px;
+    margin-bottom:20px;
 }
 
 #text{
     white-space:pre-line;
+    font-size:22px;
     line-height:1.8;
-    font-size:18px;
 }
 
-button{
+#choices button,
+#menu button,
+#controls button{
     width:100%;
-    padding:15px;
-    margin-top:10px;
-    font-size:18px;
+    padding:20px;
+    margin:8px 0;
+    border:none;
     background:#222;
     color:white;
-    border:none;
+    font-size:24px;
 }
 
-button:hover{
+#choices button:hover,
+#menu button:hover,
+#controls button:hover{
     background:#333;
 }
 
-#menu{
-    margin-top:20px;
-}
 #map{
-
+    width:400px;
+    height:400px;
+    margin:40px auto;
+    border:3px solid white;
     position:relative;
-
-    width:320px;
-    height:320px;
-
-    border:2px solid white;
-
-    margin:auto;
-
     background:#222;
+    overflow:hidden;
 }
 
 #player{
-
     position:absolute;
-
-    left:140px;
-    top:140px;
-
-    font-size:32px;
+    left:180px;
+    top:180px;
+    font-size:28px;
+    transition:0.15s;
 }
 
 .map-object{
-
     position:absolute;
-
-    font-size:32px;
+    font-size:40px;
 }
 
 #controls{
-
     margin-top:20px;
-
     text-align:center;
+}
+
+#controls div{
+    display:flex;
+    gap:10px;
+}
+
+#controls div button{
+    flex:1;
+}
+
+@media(max-width:600px){
+
+    #title{
+        font-size:30px;
+    }
+
+    #text{
+        font-size:18px;
+    }
+
+    #speaker{
+        font-size:22px;
+    }
+
+    #map{
+        width:320px;
+        height:320px;
+    }
 }
